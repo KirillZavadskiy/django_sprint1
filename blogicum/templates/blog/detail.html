@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Дневник. 1.0. Страница поста{% endblock %}
+
+{% block content %}
+  <h3>{{ post.location }}</h3>
+  <p>{{ post.date }}</p>
+  <p>{{ post.category }}</p>
+  <p>{{ post.text }}</p>
+{% endblock %}

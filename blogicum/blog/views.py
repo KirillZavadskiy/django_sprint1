@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.http import Http404
+
 posts = [
     {
         'id': 0,
@@ -45,18 +47,21 @@ posts = [
 
 
 def index(request):
-    template = 'blog/index.html'
-    context = {'index': reversed(posts)}
-    return render(request, template, context)
+    '''Главная страница со всеми постами.'''
+    context = {'main_posts': reversed(posts)}
+    return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, pk):
-    template = 'blog/detail.html'
-    context = {'post': posts[pk]}
-    return render(request, template, context)
+def post_detail(request, post_id):
+    '''Страница поста под номером post_id.'''
+    try:
+        context = {'post': posts[post_id]}
+    except IndexError:
+        raise Http404(f'❌ No post "{post_id}" in blog.')
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    template = 'blog/category.html'
-    context = {'slug': category_slug}
-    return render(request, template, context)
+    '''Страница с постами определнной категории.'''
+    context = {'category_name': category_slug}
+    return render(request, 'blog/category.html', context)

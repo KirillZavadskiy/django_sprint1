@@ -2,11 +2,11 @@
 <header class="nav navbar-collapse">
   <img src="{% static 'logo1.png' %}" width="25" height="25" alt="Логотип колба">
   <nav>
-    <ul class="nav navbar-right" color="black">
+    <ul class="nav navbar">
       <h3>Блогикум</h3>
-      <a class="nav-link active" href="{% url 'blog:index' %}">Лента записей</a>
-      <a class="nav-link active" href="{% url 'pages:about' %}">О проекте</a>
-      <a class="nav-link active" href="{% url 'pages:rules' %}">Наши правила</a>
+      <a class="nav-link{% if request.resolver_match.view_name == 'blog:index' %}active{% endif %}" href="{% url 'blog:index' %}">Лента записей</a>
+      <a class="nav-link{% if request.resolver_match.view_name == 'pages:about' %}active{% endif %}" href="{% url 'pages:about' %}">О проекте</a>
+      <a class="nav-link{% if request.resolver_match.view_name == 'pages:rules' %}active{% endif %}" href="{% url 'pages:rules' %}">Наши правила</a>
     </ul>
   </nav>
 </header>
